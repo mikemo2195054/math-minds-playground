@@ -1,0 +1,16 @@
+body {
+    height: 100vh;
+    margin: 1.91% 19.1%;
+    font-family: 'Roboto', sans-serif;
+}
+
+.entries {
+    display: flex;
+}
+
+.entry {
+    border-radius: 10px;
+    overflow: hidden;
+    width: 300px;
+    margin: 30px;
+}
