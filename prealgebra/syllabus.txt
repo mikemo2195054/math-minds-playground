@@ -1,0 +1,45 @@
+Introduction to Numbers and Operations
+    Understanding the Number System
+    Integers and Rational Numbers
+    Order of Operations
+
+From Numbers to Variables
+    Introduction to Variables
+    Translating Verbal Expressions to Algebraic Expressions
+    Plug in Values
+
+What is Expressions
+    Definition and Components of Algebraic Expressions
+    Identifying Terms, Coefficients, and Constants
+    Classifying Expressions
+
+Simplifying Algebraic Expressions
+    Combining Like Terms
+    Distributive Property
+    Removing Parentheses in Algebraic Expressions
+
+Solving Basic Equations
+    Introduction to Equations
+    One-Step Equations
+    Two-Step Equations
+    Multi-Step Equations
+
+Geometry Fundamentals
+    Points, Lines, and Planes
+    Angles and Angle Relationships
+    Triangles and Quadrilaterals
+    
+Measurement and Proportions
+    Units of Measurement
+    Ratios and Proportions
+    Similar Figures and Scale Factor
+
+
+Problem Solving and Real-World Applications
+    Problem-Solving Strategies
+    Applying Prealgebra Concepts to Real-World Scenarios
+    Critical Thinking and Mathematical Modeling
+
+Review and Preparation for Algebra I
+    Recap of Key Prealgebra Concepts
+    Bridging to Advanced Algebra
