@@ -1,0 +1,45 @@
+<html>
+
+<head>
+    <title>Number System Game</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <canvas id="gameCanvas"></canvas>
+
+    <script>
+        // Your JavaScript code for the number system game goes here
+
+        // Example: Drawing a rectangle on the canvas
+        var canvas = document.getElementById("gameCanvas");
+        var ctx = canvas.getContext("2d");
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        ctx.fillStyle = "blue";
+
+        for (i = 0; i < canvas.width - 100; i += 50) {
+            for (j = 0; j < canvas.height - 100; j++) {
+                ctx.fillRect(i, j, 100, 100);
+                console.log(i, j);
+                for(k=0;k<=10000000;k++);
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>

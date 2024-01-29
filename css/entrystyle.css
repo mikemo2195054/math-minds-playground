@@ -5,8 +5,13 @@
 
 .entry {
     border-radius: 10px;
-    overflow: hidden;
     width: 300px;
-    margin: 30px;
+    margin:  30px 10px;
+    padding: 20px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
+.entry:hover{
+    box-shadow: 0 0 15px rgba(0,0,0, 0.1);
+    transition: 0.5s;
+}
