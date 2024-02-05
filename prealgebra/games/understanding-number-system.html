@@ -19,25 +19,81 @@
     <canvas id="gameCanvas"></canvas>
 
     <script>
-        // Your JavaScript code for the number system game goes here
+        // data
 
-        // Example: Drawing a rectangle on the canvas
+        var textArray = [
+            "This little blue square is an angel.",
+            "When there is an angel, we call it one angel. We use the arabic number \"1\" to represent it.",
+            "Now there are two angles. We use the arabic number \"2\" to represent it."
+        ];
+
+        var button = document.createElement("button");
+        button.innerHTML = "Next >>";
+        button.style.position = "absolute";
+        button.style.bottom = "10px";
+        button.style.right = "10px";
+        button.style.padding = "10px";
+        button.style.fontSize = "16px";
+
+        // canvas
+
         var canvas = document.getElementById("gameCanvas");
         var ctx = canvas.getContext("2d");
 
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        ctx.fillStyle = "blue";
-
-        for (i = 0; i < canvas.width - 100; i += 50) {
-            for (j = 0; j < canvas.height - 100; j++) {
-                ctx.fillRect(i, j, 100, 100);
-                console.log(i, j);
-                for(k=0;k<=10000000;k++);
-            }
+        function adjustCanvasSize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            runGame();
         }
 
+        //window.addEventListener('resize', adjustCanvasSize);
+        adjustCanvasSize();
+
+        // game
+
+        function displayText(x, heightPos) {
+            var textWidth = ctx.measureText(textArray[x]).width;
+            ctx.fillStyle = "black";
+            ctx.font = "20px sans-serif";
+            ctx.fillText(textArray[x], canvas.width / 2 - textWidth / 2, heightPos);
+        }
+
+        function displayOneIntroText1() {
+            ctx.fillStyle = 'white';
+            ctx.fillRect(0,0,canvas.width,canvas.height);
+
+            ctx.fillStyle = "blue";
+            ctx.fillRect(canvas.width / 2 - 50, canvas.height / 3 - 50, 100, 100);
+            ctx.stroke();
+
+            displayText(0, canvas.height / 3 * 2);
+            canvas.parentNode.appendChild(button);
+
+            button.onclick = displayOneIntroText2;
+        }
+
+        function displayOneIntroText2() {
+            displayText(1, canvas.height / 3 * 2 + 50);
+            button.onclick = displayTwo;
+        }
+
+        function displayTwo(){
+            ctx.fillStyle = 'white';
+            ctx.fillRect(0,0,canvas.width,canvas.height);
+
+            ctx.fillStyle = "blue";
+            ctx.fillRect(canvas.width / 2-50-100, canvas.height / 3 - 50, 100, 100);
+            ctx.fillRect(canvas.width / 2-50+100, canvas.height / 3 - 50, 100, 100);
+            ctx.stroke();
+
+            displayText(2,canvas.height/3*2);
+        }
+
+        function runGame() {
+            displayOneIntroText1();
+        }
+
+        runGame();
     </script>
 
 </body>
