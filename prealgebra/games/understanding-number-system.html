@@ -24,16 +24,20 @@
         var textArray = [
             "This little blue square is an angel.",
             "When there is an angel, we call it one angel. We use the arabic number \"1\" to represent it.",
-            "Now there are two angles. We use the arabic number \"2\" to represent it."
+            "Now there are two angles. We use the arabic number \"2\" to represent it.",
+            "Now how many angles are there?",
+            "1, 2, 3, ... We have successfully built our number system for counting. Congratulations!",
+            "Now we can do something using the numbers."
         ];
 
-        var button = document.createElement("button");
-        button.innerHTML = "Next >>";
-        button.style.position = "absolute";
-        button.style.bottom = "10px";
-        button.style.right = "10px";
-        button.style.padding = "10px";
-        button.style.fontSize = "16px";
+        var nextButton = document.createElement("button");
+        nextButton.innerHTML = "Next >>";
+        nextButton.id = "next";
+        nextButton.style.position = "absolute";
+        nextButton.style.bottom = "10px";
+        nextButton.style.right = "10px";
+        nextButton.style.padding = "10px";
+        nextButton.style.fontSize = "16px";
 
         // canvas
 
@@ -46,8 +50,21 @@
             runGame();
         }
 
-        //window.addEventListener('resize', adjustCanvasSize);
         adjustCanvasSize();
+
+        // functino
+
+        function createButton(id, content, positionBottom, positionLeft){
+            var myButton = document.createElement("button");
+            myButton.id = id;
+            myButton.innerHTML = content;
+            myButton.style.position = "absolute";
+            myButton.style.bottom = positionBottom;
+            myButton.style.left = positionLeft;
+            myButton.style.padding = "10px";
+            myButton.style.fontSize = "16px";
+            return myButton;
+        }
 
         // game
 
@@ -60,36 +77,116 @@
 
         function displayOneIntroText1() {
             ctx.fillStyle = 'white';
-            ctx.fillRect(0,0,canvas.width,canvas.height);
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
 
             ctx.fillStyle = "blue";
             ctx.fillRect(canvas.width / 2 - 50, canvas.height / 3 - 50, 100, 100);
             ctx.stroke();
 
             displayText(0, canvas.height / 3 * 2);
-            canvas.parentNode.appendChild(button);
 
-            button.onclick = displayOneIntroText2;
+            nextButton.onclick = displayOneIntroText2;
         }
 
         function displayOneIntroText2() {
             displayText(1, canvas.height / 3 * 2 + 50);
-            button.onclick = displayTwo;
+            nextButton.onclick = displayTwo;
         }
 
-        function displayTwo(){
+        function displayTwo() {
             ctx.fillStyle = 'white';
-            ctx.fillRect(0,0,canvas.width,canvas.height);
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
 
             ctx.fillStyle = "blue";
-            ctx.fillRect(canvas.width / 2-50-100, canvas.height / 3 - 50, 100, 100);
-            ctx.fillRect(canvas.width / 2-50+100, canvas.height / 3 - 50, 100, 100);
+            ctx.fillRect(canvas.width / 2 - 50 - 100, canvas.height / 3 - 50, 100, 100);
+            ctx.fillRect(canvas.width / 2 - 50 + 100, canvas.height / 3 - 50, 100, 100);
             ctx.stroke();
 
-            displayText(2,canvas.height/3*2);
+            displayText(2, canvas.height / 3 * 2);
+            nextButton.onclick = displayThree;
+        }
+
+        function displayThree() {
+            ctx.fillStyle = 'white';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Display three blue squares
+            ctx.fillStyle = "blue";
+            ctx.fillRect(canvas.width / 2 - 50 - 150, canvas.height / 3 - 50, 100, 100);
+            ctx.fillRect(canvas.width / 2 - 50, canvas.height / 3 - 50, 100, 100);
+            ctx.fillRect(canvas.width / 2 - 50 + 150, canvas.height / 3 - 50, 100, 100);
+            ctx.stroke();
+
+            // Display the question
+            canvas.parentNode.removeChild(nextButton);
+            displayText(3, canvas.height / 3 * 2);
+
+            // Create buttons for options
+            var buttonCorrect = createButton("correct", "3", "60px", "50%");
+
+            incorrectNum1 = Math.ceil(Math.random()*9);
+            console.log(incorrectNum1);
+            while(incorrectNum1 == 3){
+                incorrectNum1 = Math.ceil(Math.random()*9);
+            }
+            console.log(incorrectNum1);
+
+
+            incorrectNum2 = Math.ceil(Math.random()*9);
+            while(incorrectNum2 == 3 || incorrectNum2 == incorrectNum1){
+                incorrectNum2 = Math.ceil(Math.random()*9);
+            }
+
+            var buttonIncorrect1 = createButton("inco1", incorrectNum1, "60px", "40%");
+            var buttonIncorrect2 = createButton("inco2", incorrectNum2, "60px", "60%");
+
+            // Append buttons to the parent node
+            canvas.parentNode.appendChild(buttonCorrect);
+            canvas.parentNode.appendChild(buttonIncorrect1);
+            canvas.parentNode.appendChild(buttonIncorrect2);
+
+            canvas.parentNode.appendChild(nextButton);
+
+            // Add click event listeners
+            buttonCorrect.onclick = displayCorrect;
+            buttonIncorrect1.onclick = buttonIncorrect2.onclick = displayIncorrect;
+            nextButton.onclick = displaySummerizeNumber;
+        }
+
+        function displayCorrect() {
+            ctx.fillStyle = 'white';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Display "Correct!"
+            ctx.fillStyle = "green";
+            ctx.font = "60px sans-serif";
+            var text = "Correct!";
+            var textWidth = ctx.measureText(text).width;
+            ctx.fillText(text, canvas.width / 2 - textWidth / 2, canvas.height / 2);
+
+            canvas.parentNode.removeChild(document.getElementById("correct"));
+            canvas.parentNode.removeChild(document.getElementById("inco1"));
+            canvas.parentNode.removeChild(document.getElementById("inco2"));
+        }
+
+        function displayIncorrect() {
+            // Display "Incorrect"
+            ctx.fillStyle = "red";
+            ctx.font = "30px sans-serif";
+            var text = "Incorrect!";
+            var textWidth = ctx.measureText(text).width;
+            ctx.fillText(text, canvas.width / 2 - textWidth / 2, 80);
+        }
+
+        function displaySummerizeNumber(){
+            ctx.fillStyle = 'white';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            displayText(4,canvas.height / 4);
         }
 
         function runGame() {
+            canvas.parentNode.appendChild(nextButton);
             displayOneIntroText1();
         }
 
